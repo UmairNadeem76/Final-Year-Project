@@ -1,0 +1,117 @@
+.stats-wrapper {
+    background: linear-gradient(to bottom right, #0f172a, #1e293b);
+    padding: 0.1rem 2rem 4rem;
+    text-align: center;
+    color: #f1f5f9;
+}
+
+.section-subtitle {
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2.2rem;
+    font-size: 1.75rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+    color: #ffd700;
+}
+
+.feature-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.feature-item {
+    width: 300px;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    color: #f1f5f9;
+    transition: all 0.6s ease;
+}
+
+.feature-item img {
+    width: 90px;
+    margin-bottom: 1rem;
+    object-fit: contain;
+}
+
+.feature-item h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.feature-item p {
+    font-size: 1rem;
+    color: #cbd5e1;
+}
+
+.counters {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    flex-wrap: wrap;
+}
+
+.counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.counter svg {
+    width: 100px;
+    height: 100px;
+    transform: rotate(-90deg);
+}
+
+.counter circle {
+    fill: none;
+    stroke-width: 10;
+    stroke: #e5e7eb;
+}
+
+.counter circle:last-child {
+    stroke: #2563eb;
+    stroke-dasharray: 282.6;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.counter h3 {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.counter p {
+    font-size: 1rem;
+    color: #cbd5e1;
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.hidden,
+.reveal {
+    will-change: transform, opacity;
+}

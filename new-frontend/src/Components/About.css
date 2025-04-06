@@ -1,0 +1,24 @@
+.about-container {
+    max-width: 2000px;
+    margin: 0 auto;
+    padding: 4rem 9rem;
+    text-align: center;
+    background: linear-gradient(to bottom right, #0f172a, #1e293b);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.about-container h1 {
+    font-size: 2.2rem;
+    color: #ffd700;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.about-container p {
+    font-size: 1.3rem;
+    line-height: 1.75;
+    text-align: justify;
+    color: #e2e8f0;
+    font-weight: 400;
+}

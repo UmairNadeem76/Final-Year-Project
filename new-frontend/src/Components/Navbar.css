@@ -1,0 +1,155 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    backdrop-filter: blur(18px);
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.navbar-logo {
+    width: 67px;
+    height: 55px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-buttons button {
+    background: none;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    color: #eee;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-buttons button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffd700;
+}
+
+.nav-buttons button.active {
+    background: #ffd700;
+    color: #000;
+    font-weight: bold;
+}
+
+/* existing styles remain unchanged */
+.profile-wrapper {
+    position: relative;
+    margin-left: 1rem;
+}
+
+.profile-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #3b82f6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+}
+
+.profile-circle:hover {
+    background-color: #2563eb;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 65px;
+    right: 0;
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    width: 220px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.user-info {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+    color: #fff;
+}
+
+.user-info strong {
+    display: block;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.user-email {
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 0.6rem 0;
+}
+
+.dropdown-menu button {
+    background: transparent;
+    border: none;
+    color: #eee;
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.dropdown-menu button:hover {
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

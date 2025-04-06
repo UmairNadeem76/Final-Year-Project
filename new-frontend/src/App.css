@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 0px;
+  color: black;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+.page-scroll-wrapper {
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: overlay;
+}
+
+.page-scroll-wrapper::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}

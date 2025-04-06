@@ -1,0 +1,37 @@
+.hero-section {
+    background-color: #f3f4f6;
+    padding: 5rem 1rem;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin-bottom: 2rem;
+}
+
+.hero-button {
+    background-color: #2563eb;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.hero-button:hover {
+    background-color: #1d4ed8;
+}

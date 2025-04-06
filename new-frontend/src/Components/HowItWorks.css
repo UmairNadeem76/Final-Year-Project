@@ -1,0 +1,67 @@
+.how-wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 5rem 0;
+    background: linear-gradient(to bottom right, #1e293b, #334155);
+}
+
+.how-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+.how-title {
+    margin-top: -1.8rem;
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+    color: #ffd700;
+}
+
+.how-steps {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    flex-wrap: wrap;
+}
+
+.how-step {
+    width: 250px;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    color: #1e293b;
+    border-radius: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.how-step img {
+    width: 100px;
+    margin-bottom: 1rem;
+}
+
+.how-step h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.how-step p {
+    font-size: 1rem;
+    color: #475569;
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
