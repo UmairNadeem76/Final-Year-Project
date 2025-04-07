@@ -123,8 +123,7 @@ const Home: React.FC = () => {
                 Your browser does not support the video tag.
             </video>
 
-            <div
-                className={`upload-box ${dragOver ? 'drag-over' : ''}`}
+            <div className={`upload-box ${dragOver ? 'drag-over' : ''} ${image ? 'image-present' : ''}`}
                 onDragOver={(e) => {
                     e.preventDefault();
                     setDragOver(true);
