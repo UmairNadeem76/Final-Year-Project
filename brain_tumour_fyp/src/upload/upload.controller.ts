@@ -9,10 +9,12 @@ import { Response } from 'express';
 @Controller('upload')
 export class UploadController {
 
+
     constructor(
-        private readonly uploadService: UploadService,
-        private readonly usersService: UsersService,
-        private readonly mriClassificationService: MriClassificationService) { }
+        private readonly uploadService: UploadService, 
+        private readonly usersService: UsersService, 
+        private readonly mriClassificationService: MriClassificationService) 
+    {}
 
     @UseGuards(UsersGuard)
     @Post()
@@ -32,7 +34,7 @@ export class UploadController {
     ) {
         const email = request.user.email;
         if (!file) {
-            throw new HttpException('File Not Found', HttpStatus.BAD_REQUEST);
+            throw new HttpException('File not found', HttpStatus.BAD_REQUEST);
         }
         const filename = await this.uploadService.saveFile(file, email);
         const res = await this.mriClassificationService.classifyMri(filename);
@@ -50,4 +52,6 @@ export class UploadController {
         }
         res.sendFile(filePath, { headers: { 'Content-Type': /(image\/jpeg|image\/png|image\/HEIF|image\/HEIC)/ } });
     }
+
+
 }

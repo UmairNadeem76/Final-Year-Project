@@ -12,4 +12,4 @@ import { MriClassificationModule } from 'src/mri-classification/mri-classificati
   providers: [UploadService],
   controllers: [UploadController]
 })
-export class UploadModule { }
+export class UploadModule {}

@@ -11,7 +11,7 @@ export class MriClassificationService {
     constructor(
         private readonly httpService: HttpService,
         private readonly configService: ConfigService,
-
+        
     ) {
         this.apiUrl = this.configService.get<string>('API_URL')!;
     }
@@ -27,11 +27,15 @@ export class MriClassificationService {
             return response.data.predicted_class;
         }
         catch (error) {
-            this.logger.error('Error Classifying MRI:', error);
+            this.logger.error('Error classifying MRI:', error);
             throw new HttpException(
                 'Failed to classify MRI image',
                 HttpStatus.INTERNAL_SERVER_ERROR
-            );
+              );
         }
     }
+
+
+
+
 }

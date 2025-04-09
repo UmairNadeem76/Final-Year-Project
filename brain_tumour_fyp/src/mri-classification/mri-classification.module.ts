@@ -8,4 +8,4 @@ import { ConfigModule } from '@nestjs/config';
   providers: [MriClassificationService],
   exports: [MriClassificationService],
 })
-export class MriClassificationModule { }
+export class MriClassificationModule {}

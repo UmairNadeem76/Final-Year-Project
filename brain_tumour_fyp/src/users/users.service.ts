@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User, UserDocument, DiagnosisHistory } from 'src/schemas/user.schema';
+import { User, UserDocument, DiagnosisHistory  } from 'src/schemas/user.schema';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
@@ -54,8 +54,8 @@ export class UsersService {
         });
         this.logger.log(`User created: ${email}`);
         return newUser.toObject() as UserPayload;
-
-
+        
+        
     }
 
 
@@ -107,7 +107,7 @@ export class UsersService {
             this.logger.warn(`User not found for email: ${email}`);
             return null;
         }
-        const { password, ...userData } = user;
+        const {password, ...userData} = user;
         this.logger.log(`User data retrieved for email: ${email}`);
         return userData;
     }
@@ -140,4 +140,6 @@ export class UsersService {
         return userData as Partial<UserPayload>;
 
     }
+
+    
 }

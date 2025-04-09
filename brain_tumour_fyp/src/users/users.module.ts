@@ -23,4 +23,4 @@ import { UsersGuard } from './users.guard';
   providers: [UsersService, UsersGuard],
   exports: [UsersGuard, UsersService],
 })
-export class UsersModule { }
+export class UsersModule {}

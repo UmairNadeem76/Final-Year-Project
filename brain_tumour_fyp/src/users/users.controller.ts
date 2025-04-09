@@ -8,19 +8,19 @@ import { UsersGuard } from './users.guard';
 
 @Controller('users')
 export class UsersController {
-    constructor(private readonly usersService: UsersService, private readonly configService: ConfigService) { }
+    constructor(private readonly usersService: UsersService, private readonly configService: ConfigService) {}
 
     @Post('register')
     async register(@Body() createUserDto: CreateUserDto) {
         createUserDto.email = createUserDto.email.toLowerCase();
         try {
             await this.usersService.register(createUserDto);
-            return { message: `User ${createUserDto.email} Registered Successfully` };
+            return { message: `User ${createUserDto.email} registered successfully` };
         } catch (error) {
-            if (error.message === 'User Already Exists') {
-                throw new HttpException('User Already Exists', HttpStatus.CONFLICT);
+            if (error.message === 'User already exists') {
+                throw new HttpException('User already exists', HttpStatus.CONFLICT);
             }
-            throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -36,21 +36,21 @@ export class UsersController {
                 path: '/',
                 maxAge: 24 * 60 * 60 * 1000, // 1 day
             });
-            return { message: `User ${loginDto.email} Logged In Successfully` };
+            return { message: `User ${loginDto.email} logged in successfully` };
         }
         catch (error) {
             if (error.message === 'Invalid credentials') {
-                throw new HttpException('Invalid Credentials. Please Recheck And Try Again.', HttpStatus.UNAUTHORIZED);
+                throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
             }
-            throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @UseGuards(UsersGuard)
     @Post('logout')
     async logout(@Req() request) {
-        request.res.clearCookie('accessToken', { path: '/' });
-        return { message: 'User Logged Out Successfully' };
+        request.res.clearCookie('accessToken', { path: '/' } );
+        return { message: 'User logged out successfully' };
     }
 
     @UseGuards(UsersGuard)
@@ -59,8 +59,12 @@ export class UsersController {
         const email = request.user.email;
         const user = await this.usersService.getUserData(email);
         if (!user) {
-            throw new HttpException('User Not Found', HttpStatus.NOT_FOUND);
+            throw new HttpException('User not found', HttpStatus.NOT_FOUND);
         }
         return user;
     }
+
+    
+
+
 }

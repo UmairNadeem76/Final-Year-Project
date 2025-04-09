@@ -6,7 +6,7 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class UsersGuard implements CanActivate {
 
-  constructor(private usersService: UsersService) { }
+  constructor(private usersService: UsersService) {}
 
   canActivate(
     context: ExecutionContext,
@@ -18,15 +18,15 @@ export class UsersGuard implements CanActivate {
       return false;
     }
 
-    const res = this.usersService.isAccessTokenValid(accessToken);
-    if (!res) return false;
+   const res = this.usersService.isAccessTokenValid(accessToken);
+   if (!res) return false;
 
-    request.user = {
-      email: res.email,
-      role: res.role,
-    }
+   request.user = {
+    email: res.email,
+    role: res.role,
+   }
 
-    return true;
+  return true;
 
   }
 }

@@ -4,6 +4,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { UploadModule } from './upload/upload.module';
 import { MriClassificationModule } from './mri-classification/mri-classification.module';
+import { DiscordModule } from './discord/discord.module';
+import { NotificationsController } from './notifications/notifications.controller';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { MriClassificationModule } from './mri-classification/mri-classification
     UsersModule,
     UploadModule,
     MriClassificationModule,
+    DiscordModule,
   ],
+  controllers: [NotificationsController],
 })
 export class AppModule {}

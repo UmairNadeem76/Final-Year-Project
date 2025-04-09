@@ -13,7 +13,7 @@ export enum UserRole {
 const HistorySchema = new MongooseSchema({
     filename: { type: String, required: true },
     timestamp: { type: Date, default: Date.now },
-    result: { type: String, required: true },
+    result : { type: String, required: true },
 }, { _id: false });
 
 export type DiagnosisHistory = {
@@ -38,7 +38,7 @@ export class User {
 
     @Prop({
         type: [HistorySchema],
-        default: [],
+        default: [], 
     })
     history: DiagnosisHistory[];
 }
