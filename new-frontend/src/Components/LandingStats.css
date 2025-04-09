@@ -21,14 +21,26 @@
 }
 
 .feature-grid {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
+    justify-items: center;
+    align-items: stretch;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+@media (min-width: 1300px) {
+    .feature-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
 }
 
 .feature-item {
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     padding: 2rem;
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 1rem;

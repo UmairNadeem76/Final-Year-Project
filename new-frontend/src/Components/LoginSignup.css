@@ -5,14 +5,11 @@ body {
 }
 
 .container {
+    margin-top: 45px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
-    margin-top: 210px;
-    max-width: 500px;
     width: 100%;
-    min-height: 560px;
     max-width: 450px;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(20px);
@@ -20,6 +17,7 @@ body {
     border-radius: 30px;
     padding: 3rem 2rem;
     box-shadow: 0 8px 30px rgba(163, 113, 247, 0.4);
+    animation: slideFade 0.6s ease forwards;
 }
 
 .header {
@@ -251,7 +249,9 @@ body {
 .login-wrapper {
     display: flex;
     height: 100vh;
+    width: 100%;
     overflow: hidden;
+    flex-wrap: wrap;
 }
 
 .login-signup-wrapper {
@@ -267,6 +267,9 @@ body {
     justify-content: center;
     align-items: center;
     background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    padding: 2rem;
+    min-height: 100vh;
+    overflow-y: auto;
 }
 
 .image-section img {
@@ -294,7 +297,6 @@ body {
 }
 
 .tab-header {
-    margin-top: 1.5rem;
     display: flex;
     justify-content: space-around;
     background: rgba(255, 255, 255, 0.05);

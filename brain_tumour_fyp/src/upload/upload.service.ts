@@ -45,8 +45,8 @@ export class UploadService {
       await fs.access(filePath); // Check if file exists
       return filePath;
     } catch (error) {
-      console.error('Error accessing file:', error);
-      throw new HttpException('File not found', HttpStatus.NOT_FOUND);
+      console.error('Error Accessing File:', error);
+      throw new HttpException('File Not Found', HttpStatus.NOT_FOUND);
     }
   }
 }

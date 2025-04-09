@@ -81,7 +81,7 @@ const Home: React.FC = () => {
 
             const response = await fetch('http://localhost:5000/upload', {
                 method: 'POST',
-                credentials: 'include', // Send cookies
+                credentials: 'include',
                 body: formData,
             });
 
@@ -162,10 +162,10 @@ const Home: React.FC = () => {
                 )}
             </div>
 
-            {image && (
+            {(image && !success && !error) && (
                 <div className="button-group">
                     <button
-                        className={`upload-submit-button ${!image ? 'disabled' : 'enabled'}`}
+                        className={`upload-submit-button ${image ? 'enabled' : ''}`}
                         onClick={handleSubmit}
                         disabled={!image}
                     >
@@ -173,6 +173,17 @@ const Home: React.FC = () => {
                     </button>
                     <button className="upload-cancel-button" onClick={resetAll}>
                         Cancel
+                    </button>
+                </div>
+            )}
+
+            {(success || error) && (
+                <div className="button-group">
+                    <button
+                        className="upload-again-button"
+                        onClick={resetAll}
+                    >
+                        Upload Again?
                     </button>
                 </div>
             )}

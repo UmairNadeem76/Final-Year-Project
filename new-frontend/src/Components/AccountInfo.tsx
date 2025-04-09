@@ -55,7 +55,7 @@ const AccountInfo: React.FC = () => {
                         onChange={(e) => setSelectedFilter(e.target.value)}
                     >
                         <option value="All">All</option>
-                        <option value="No Tumor">No Tumor</option>
+                        <option value="No Tumor">NoTumor</option>
                         <option value="Glioma">Glioma</option>
                         <option value="Meningioma">Meningioma</option>
                         <option value="Pituitary">Pituitary</option>

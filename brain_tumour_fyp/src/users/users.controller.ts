@@ -50,7 +50,7 @@ export class UsersController {
     @Post('logout')
     async logout(@Req() request) {
         request.res.clearCookie('accessToken', { path: '/' });
-        return { message: 'User logged out successfully' };
+        return { message: 'User Logged Out Successfully' };
     }
 
     @UseGuards(UsersGuard)

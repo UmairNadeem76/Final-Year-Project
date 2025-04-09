@@ -15,6 +15,7 @@ const Contact: React.FC = () => {
     });
 
     const [showSuccess, setShowSuccess] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -28,7 +29,7 @@ const Contact: React.FC = () => {
         }
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const newErrors = {
@@ -42,11 +43,36 @@ const Contact: React.FC = () => {
         const hasErrors = Object.values(newErrors).some(error => error !== '');
         if (hasErrors) return;
 
-        // Success
-        setShowSuccess(true);
-        setFormData({ name: '', email: '', message: '' });
+        try {
+            setIsSubmitting(true);
 
-        setTimeout(() => setShowSuccess(false), 3000);
+            // Send POST request to server
+            const response = await fetch('http://localhost:5000/notifications', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: formData.name,
+                    email: formData.email,
+                    description: formData.message
+                }),
+            });
+
+            if (response.ok) {
+                // Success
+                setShowSuccess(true);
+                setFormData({ name: '', email: '', message: '' });
+                setTimeout(() => setShowSuccess(false), 3000);
+            } else {
+                alert('Failed to send message. Please try again later.');
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
+            alert('An error occurred while sending your message. Please try again later.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -86,7 +112,13 @@ const Contact: React.FC = () => {
                     ></textarea>
                     {errors.message && <div className="error-message">{errors.message}</div>}
 
-                    <button className="contact-submit-button" type="submit">Submit</button>
+                    <button
+                        className="contact-submit-button"
+                        type="submit"
+                        disabled={isSubmitting}
+                    >
+                        {isSubmitting ? 'Sending...' : 'Submit'}
+                    </button>
                 </form>
                 {showSuccess && <div className="success-popup">Message Sent Successfully! ✅</div>}
             </div>
