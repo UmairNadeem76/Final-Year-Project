@@ -32,7 +32,17 @@ const AccountInfo: React.FC = () => {
     return (
         <div className="account-info-container">
             {loading ? (
-                <div className="account-card">Loading user info...</div>
+                <div className="account-card">
+                    <div className="account-loading">
+                        <div className="account-loading-icon"></div>
+                        <div className="account-loading-text">Loading User Information</div>
+                        <div className="account-loading-dots">
+                            <div className="account-loading-dot"></div>
+                            <div className="account-loading-dot"></div>
+                            <div className="account-loading-dot"></div>
+                        </div>
+                    </div>
+                </div>
             ) : !user ? (
                 <div className="account-card error">User not found or not logged in.</div>
             ) : (

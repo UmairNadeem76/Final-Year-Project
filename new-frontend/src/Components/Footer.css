@@ -103,6 +103,12 @@
     .footer-section li {
         list-style-position: inside;
     }
+
+    .quick-links,
+    .follow-us,
+    .contact-adjust {
+        margin-left: 0;
+    }
 }
 
 @media (max-width: 600px) {

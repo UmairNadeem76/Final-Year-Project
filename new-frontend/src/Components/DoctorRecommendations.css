@@ -1,0 +1,434 @@
+.doctor-recommendations-container {
+    min-height: 100vh;
+    padding: 120px 20px 60px;
+    background: linear-gradient(135deg, #0f172a, #233876);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    overflow-x: hidden;
+    position: relative;
+    animation: slideFade 0.6s ease forwards;
+}
+
+.doctor-recommendations-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 1;
+}
+
+.doctor-hero-section,
+.doctor-grid,
+.doctor-disclaimer {
+    position: relative;
+    z-index: 2;
+}
+
+.doctor-hero-section {
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: slideFade 0.8s ease forwards;
+}
+
+.doctor-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease forwards;
+}
+
+.doctor-subtitle {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin-bottom: 40px;
+    opacity: 0.9;
+    animation: fadeIn 1.2s ease forwards;
+}
+
+.doctor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+    animation: slideFade 1s ease forwards;
+}
+
+.doctor-card {
+    perspective: 1000px;
+    cursor: pointer;
+    height: 450px;
+    transition: transform 0.3s ease;
+    animation: slideFade 0.6s ease forwards;
+}
+
+.doctor-card:hover {
+    transform: translateY(-5px);
+}
+
+.doctor-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.doctor-card.flipped .doctor-card-inner {
+    transform: rotateY(180deg);
+}
+
+.doctor-card-front,
+.doctor-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 30px rgba(163, 113, 247, 0.4);
+    transition: all 0.3s ease;
+}
+
+.doctor-card-front:hover,
+.doctor-card-back:hover {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 12px 40px rgba(163, 113, 247, 0.6);
+}
+
+.doctor-card-back {
+    transform: rotateY(180deg);
+}
+
+.doctor-image-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.doctor-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.doctor-card:hover .doctor-image {
+    border-color: rgba(96, 165, 250, 0.6);
+    transform: scale(1.05);
+}
+
+.doctor-info {
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.doctor-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.doctor-specialization {
+    font-size: 1.1rem;
+    color: #60a5fa;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.doctor-hospital {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.doctor-experience {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.flip-hint {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 15px;
+    font-style: italic;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.doctor-card:hover .flip-hint {
+    opacity: 1;
+    color: #60a5fa;
+}
+
+.contact-info {
+    width: 115%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    gap: 5px;
+}
+
+.contact-info h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #60a5fa;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    width: 90%;
+}
+
+.contact-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(96, 165, 250, 0.3);
+}
+
+.contact-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #60a5fa;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contact-value {
+    font-size: 0.95rem;
+    color: #e2e8f0;
+    font-weight: 500;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.doctor-disclaimer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(163, 113, 247, 0.4);
+    animation: slideFade 1.2s ease forwards;
+}
+
+.doctor-disclaimer h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #fbbf24;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.doctor-disclaimer p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+    opacity: 0.9;
+}
+
+/* Animation keyframes */
+@keyframes slideFade {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .doctor-recommendations-container {
+        padding: 100px 15px 40px;
+    }
+
+    .doctor-title {
+        font-size: 2.2rem;
+    }
+
+    .doctor-subtitle {
+        font-size: 1rem;
+    }
+
+    .doctor-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 10px;
+    }
+
+    .doctor-card {
+        height: 400px;
+    }
+
+    .doctor-card-front,
+    .doctor-card-back {
+        padding: 20px;
+    }
+
+    .doctor-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .doctor-name {
+        font-size: 1.3rem;
+    }
+
+    .doctor-specialization {
+        font-size: 1rem;
+    }
+
+    .contact-info h4 {
+        font-size: 1.2rem;
+    }
+
+    .doctor-disclaimer {
+        padding: 20px;
+        margin: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .doctor-title {
+        font-size: 1.8rem;
+    }
+
+    .doctor-card {
+        height: auto;
+        min-height: 380px;
+    }
+
+    .doctor-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .doctor-name {
+        font-size: 1.2rem;
+    }
+
+    .contact-item {
+        padding: 8px;
+    }
+
+    .contact-label {
+        font-size: 0.8rem;
+    }
+
+    .contact-value {
+        font-size: 0.9rem;
+    }
+}
+
+/* Animation for card entrance */
+.doctor-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.doctor-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.doctor-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.doctor-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.doctor-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.doctor-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.doctor-card:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Smooth scroll behavior */
+.doctor-recommendations-container {
+    scroll-behavior: smooth;
+}

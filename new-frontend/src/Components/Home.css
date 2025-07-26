@@ -147,6 +147,31 @@
     z-index: 1;
 }
 
+.report-actions {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0, 255, 157, 0.3);
+}
+
+.download-report-button {
+    background: linear-gradient(135deg, #1e3a8a, #4338ca);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+}
+
+.download-report-button:hover {
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
+}
+
 .progress-wrapper {
     margin-top: 1rem;
     text-align: center;

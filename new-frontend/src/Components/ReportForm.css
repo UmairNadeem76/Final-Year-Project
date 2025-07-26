@@ -1,0 +1,329 @@
+.rf-container {
+    min-height: 100vh;
+    padding: 120px 20px 60px;
+    background: linear-gradient(135deg, #0f172a, #233876);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    overflow-x: hidden;
+    position: relative;
+    animation: rf-slideFade 0.6s ease forwards;
+}
+
+.rf-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 1;
+}
+
+.rf-wrapper {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    animation: rf-slideFade 0.8s ease forwards;
+}
+
+.rf-header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: rf-fadeIn 1s ease forwards;
+}
+
+.rf-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.rf-header p {
+    font-size: 1.1rem;
+    color: #cbd5e1;
+    opacity: 0.9;
+}
+
+.rf-patient-info-summary {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 30px rgba(163, 113, 247, 0.4);
+    animation: rf-slideFade 1s ease forwards;
+}
+
+.rf-patient-info-summary h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #60a5fa;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.rf-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.rf-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.rf-info-item .label {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rf-info-item .value {
+    font-size: 1rem;
+    color: #e2e8f0;
+    font-weight: 500;
+}
+
+.rf-info-item .value.result {
+    color: #fbbf24;
+    font-weight: 600;
+}
+
+.rf-form {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    animation: rf-slideFade 1.2s ease forwards;
+}
+
+.rf-form-section {
+    margin-bottom: 2rem;
+}
+
+.rf-form-section h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #a78bfa;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rf-form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.rf-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #cbd5e1;
+    font-weight: 500;
+}
+
+.rf-input-wrapper {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 0 1rem;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.rf-input-wrapper:focus-within {
+    border-color: #a78bfa;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.rf-input-wrapper .icon {
+    margin-right: 0.75rem;
+    color: #94a3b8;
+}
+
+.rf-form-group input,
+.rf-form-group select,
+.rf-form-group textarea {
+    width: 100%;
+    padding: 0.8rem 0;
+    border: none;
+    background: transparent;
+    color: #f1f5f9;
+    font-size: 1rem;
+    outline: none;
+}
+
+.custom-datepicker-input {
+    width: 100%;
+    padding: 0.8rem 0;
+    border: none;
+    background: transparent;
+    color: #f1f5f9;
+    font-size: 1rem;
+    outline: none;
+}
+
+.rf-form-group input.readonly {
+    color: #94a3b8;
+    cursor: not-allowed;
+    font-style: italic;
+}
+
+.rf-form-group input.readonly::placeholder {
+    color: #64748b;
+}
+
+.rf-form-group select {
+    cursor: pointer;
+}
+
+.rf-form-group select option {
+    background: #1e293b;
+}
+
+.rf-form-group textarea {
+    resize: none;
+    field-sizing: content;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.rf-error-message {
+    color: #fca5a5;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    padding-left: 0.25rem;
+}
+
+.rf-submit-section {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.rf-submit-button {
+    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(96, 165, 250, 0.4);
+}
+
+.rf-submit-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(96, 165, 250, 0.5);
+}
+
+.rf-submit-button:disabled {
+    background: #6b7280;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Animation keyframes */
+@keyframes rf-slideFade {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rf-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .rf-wrapper {
+        padding: 0 1rem;
+    }
+
+    .rf-header h1 {
+        font-size: 2rem;
+    }
+
+    .rf-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .rf-form {
+        padding: 1.5rem 1rem;
+    }
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #60a5fa;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.form-group.select-group select {
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.form-group.select-group {
+    position: relative;
+}
+
+.form-group.select-group .select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #94a3b8;
+    pointer-events: none;
+}
+
+.form-group.select-group select:focus + .select-arrow {
+    border-top-color: #60a5fa;
+}
+
+.rf-form-group input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.rf-form-group .react-select-container .react-select__control {
+    background-color: #1f2937;
+    border: 1px solid #4a5568;
+} 

@@ -26,6 +26,9 @@ const Navbar: React.FC = () => {
             '/user': 'user',
             '/contact': 'contact',
             '/information': 'information',
+            '/doctors': 'doctors',
+            '/report-form': 'report-form',
+            '/download-report': 'download-report',
         };
         setActiveButton(pathMap[location.pathname] || '');
     }, [location.pathname]);
@@ -52,6 +55,14 @@ const Navbar: React.FC = () => {
     const handleUploadClick = () => {
         if (isLoggedIn) {
             handleNavigate('/home', 'home');
+        } else {
+            navigate('/login-signup');
+        }
+    };
+
+    const handleCTScanUploadClick = () => {
+        if (isLoggedIn) {
+            handleNavigate('/upload-ctscan', 'upload-ctscan');
         } else {
             navigate('/login-signup');
         }
@@ -95,9 +106,15 @@ const Navbar: React.FC = () => {
                     </button>
                 )}
                 <button onClick={handleUploadClick} className={activeButton === 'home' ? 'active' : ''}>Upload MRI</button>
+                <button onClick={handleCTScanUploadClick} className={activeButton === 'upload-ctscan' ? 'active' : ''}>Upload CT-Scan</button>
+                <button onClick={() => handleNavigate('/doctors', 'doctors')} className={activeButton === 'doctors' ? 'active' : ''}>Doctors</button>
 
                 {!loading && isLoggedIn && (
-                    <button onClick={() => handleNavigate('/user', 'user')} className={activeButton === 'user' ? 'active' : ''}>Account Info</button>
+                    <>
+                        <button onClick={() => handleNavigate('/user', 'user')} className={activeButton === 'user' ? 'active' : ''}>Account Info</button>
+                        <button onClick={() => handleNavigate('/report-form', 'report-form')} className={activeButton === 'report-form' ? 'active' : ''}>Report Form</button>
+                        <button onClick={() => handleNavigate('/download-report', 'download-report')} className={activeButton === 'download-report' ? 'active' : ''}>Download Report</button>
+                    </>
                 )}
                 <button onClick={() => handleNavigate('/contact', 'contact')} className={activeButton === 'contact' ? 'active' : ''}>Contact Us</button>
                 <button onClick={() => handleNavigate('/information', 'information')} className={activeButton === 'information' ? 'active' : ''}>About Us</button>

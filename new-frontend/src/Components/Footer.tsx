@@ -3,10 +3,11 @@ import './Footer.css';
 import logo from '../Assets/logo_footer.png';
 import { FaFacebookF, FaXTwitter, FaLinkedinIn, FaInstagram } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
+import useGeneral from '../hooks/useGeneral';
 
 const Footer: React.FC = () => {
     const navigate = useNavigate();
-    const isLoggedIn = !!localStorage.getItem('token');
+    const { isLoggedIn } = useGeneral();
 
     const handleProtectedNavigate = (path: string) => {
         if (isLoggedIn) {
@@ -30,7 +31,11 @@ const Footer: React.FC = () => {
                     <li><a href="/landing">Home</a></li>
                     {!isLoggedIn && <li><a href="/login-signup">Signup & Login</a></li>}
                     <li><button className="footer-link-button" onClick={() => handleProtectedNavigate('/home')}>Upload MRI</button></li>
+                    <li><button className="footer-link-button" onClick={() => handleProtectedNavigate('/upload-ctscan')}>Upload CT-Scan</button></li>
+                    <li><a href="/doctors">Doctors</a></li>
                     {isLoggedIn && <li><a href="/user">Account Info</a></li>}
+                    {isLoggedIn && <li><a href="/report-form">Report Form</a></li>}
+                    {isLoggedIn && <li><a href="/download-report">Download Report</a></li>}
                     <li><a href="/contact">Contact Us</a></li>
                     <li><a href="/information">About Us</a></li>
                 </ul>

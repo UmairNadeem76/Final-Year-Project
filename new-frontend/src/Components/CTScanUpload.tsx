@@ -3,7 +3,7 @@ import './Home.css';
 import useGeneral from '../hooks/useGeneral';
 import { useNavigate } from 'react-router-dom';
 
-const Home: React.FC = () => {
+const CTScanUpload: React.FC = () => {
     const [image, setImage] = useState<File | null>(null);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
@@ -69,7 +69,6 @@ const Home: React.FC = () => {
         formData.append('file', image);
 
         try {
-            console.log('Uploading image...');
             setProgress(1);
             const uploadProgress = setInterval(() => {
                 setProgress(prev => {
@@ -81,14 +80,14 @@ const Home: React.FC = () => {
                 });
             }, 30);
 
-            const response = await fetch('http://localhost:5000/upload', {
+            // Use CT-Scan model endpoint
+            const response = await fetch('http://localhost:5000/upload-ctscan', {
                 method: 'POST',
                 credentials: 'include',
                 body: formData,
             });
 
             clearInterval(uploadProgress);
-            console.log('Upload response:', response);
 
             if (!response.ok) {
                 const errorData = await response.json();
@@ -96,7 +95,6 @@ const Home: React.FC = () => {
             }
 
             const data = await response.json();
-            console.log('Prediction:', data);
             setProgress(100);
             setSuccess(true);
             setPrediction(data.prediction);
@@ -113,13 +111,12 @@ const Home: React.FC = () => {
             ]);
 
         } catch (err: any) {
-            console.error('Upload error:', err);
             setError(err.message || 'Upload failed');
         }
     };
 
     return (
-        <div className="home-container" id="upload">
+        <div className="home-container" id="upload-ctscan">
             <video autoPlay muted loop playsInline className="upload-background-video">
                 <source src={require('../Assets/mri_video1.mp4')} type="video/mp4" />
                 Your browser does not support the video tag.
@@ -155,10 +152,10 @@ const Home: React.FC = () => {
                     accept="image/png, image/jpeg"
                     onChange={handleFileChange}
                     className="file-input"
-                    id="file-upload"
+                    id="file-upload-ctscan"
                 />
                 {!image && (
-                    <label htmlFor="file-upload" className="browse-button">
+                    <label htmlFor="file-upload-ctscan" className="browse-button">
                         Browse
                     </label>
                 )}
@@ -209,7 +206,8 @@ const Home: React.FC = () => {
                             onClick={() => navigate('/report-form', {
                                 state: {
                                     scanResult: prediction,
-                                    scanImage: imageUrl
+                                    scanImage: imageUrl,
+                                    scanType: 'CT-Scan'
                                 }
                             })}
                         >
@@ -228,4 +226,4 @@ const Home: React.FC = () => {
     );
 };
 
-export default Home;
+export default CTScanUpload; 

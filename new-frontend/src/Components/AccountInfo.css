@@ -214,3 +214,122 @@
     position: relative;
     z-index: 1;
 }
+
+.account-card.error {
+    border-color: #ff4d4d;
+    box-shadow: 0 8px 30px rgba(255, 77, 77, 0.3);
+}
+
+/* Inline Loading Animation */
+.account-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    min-height: 200px;
+}
+
+.account-loading-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+    position: relative;
+    animation: accountBrainPulse 2s ease-in-out infinite;
+}
+
+.account-loading-icon::before {
+    content: '🧠';
+    font-size: 40px;
+    display: block;
+    animation: accountBrainRotate 3s linear infinite;
+}
+
+.account-loading-icon::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    animation: accountRipple 2s ease-out infinite;
+}
+
+.account-loading-text {
+    color: #e2e8f0;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+    animation: accountTextGlow 2s ease-in-out infinite;
+}
+
+.account-loading-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.account-loading-dot {
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    border-radius: 50%;
+    animation: accountDotBounce 1.4s ease-in-out infinite;
+}
+
+.account-loading-dot:nth-child(1) { animation-delay: 0s; }
+.account-loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.account-loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* Account Loading Animations */
+@keyframes accountBrainPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes accountBrainRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes accountRipple {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+}
+
+@keyframes accountTextGlow {
+    0%, 100% {
+        text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 25px rgba(255, 215, 0, 0.6);
+    }
+}
+
+@keyframes accountDotBounce {
+    0%, 80%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
