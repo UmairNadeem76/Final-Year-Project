@@ -176,17 +176,6 @@ const CTScanUpload: React.FC = () => {
                 </div>
             )}
 
-            {(success || error) && (
-                <div className="button-group">
-                    <button
-                        className="upload-again-button"
-                        onClick={resetAll}
-                    >
-                        Upload Again?
-                    </button>
-                </div>
-            )}
-
             {progress > 0 && progress < 100 && (
                 <div className="progress-wrapper">
                     <div className="progress-label">Uploading: {progress}%</div>
@@ -196,31 +185,41 @@ const CTScanUpload: React.FC = () => {
                 </div>
             )}
 
-            {success && prediction && (
-                <div className="upload-success-popup">
-                    ✅ Image Uploaded Successfully<br />
-                    <strong>Prediction:</strong> {prediction}
-                    <div className="report-actions">
+            {(success || error) && (
+                <>
+                    {success && (
+                        <div className="upload-success-popup">
+                            ✅ Image Uploaded Successfully<br />
+                            {prediction && (<><strong>Prediction:</strong> {prediction}</>)}
+                        </div>
+                    )}
+                    {error && (
+                        <div className="upload-success-popup" style={{ color: 'salmon', background: 'rgba(255, 50, 50, 0.15)', border: '1px solid #ff4d4f' }}>
+                            ❌ {error}
+                        </div>
+                    )}
+                    <div className="button-group">
                         <button
-                            className="download-report-button"
+                            className="upload-again-button"
+                            onClick={resetAll}
+                        >
+                            Upload Again?
+                        </button>
+                        <button
+                            className="generate-report-button"
+                            style={{ marginLeft: '1rem' }}
                             onClick={() => navigate('/report-form', {
                                 state: {
-                                    scanResult: prediction,
+                                    scanResult: prediction || '',
                                     scanImage: imageUrl,
                                     scanType: 'CT-Scan'
                                 }
                             })}
                         >
-                            Download Report
+                            Generate Report
                         </button>
                     </div>
-                </div>
-            )}
-
-            {error && (
-                <div className="upload-success-popup" style={{ color: 'salmon' }}>
-                    ❌ {error}
-                </div>
+                </>
             )}
         </div>
     );

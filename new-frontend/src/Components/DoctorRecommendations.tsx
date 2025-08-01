@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import './DoctorRecommendations.css';
 
 // Placeholder doctor images - you can replace these with actual doctor photos
-import doctor1Img from '../Assets/aneeq.png';
-import doctor2Img from '../Assets/doctor.png';
-import doctor3Img from '../Assets/doctor.png';
-import doctor4Img from '../Assets/doctor.png';
-import doctor5Img from '../Assets/doctor.png';
-import doctor6Img from '../Assets/doctor.png';
+import doctor1Img from '../Assets/Arif.png';
+import doctor2Img from '../Assets/Akbar.png';
+import doctor3Img from '../Assets/Inayat.png';
+import doctor4Img from '../Assets/Mohsin.png';
+import doctor5Img from '../Assets/Ghulam.png';
+import doctor6Img from '../Assets/Muzafar.png';
 
 // Background image
 import doctorBg from '../Assets/doctorbg1.jpg';
@@ -29,63 +29,63 @@ const DoctorRecommendations: React.FC = () => {
     const doctors: Doctor[] = [
         {
             id: 1,
-            name: "Dr. Sarah Johnson",
+            name: "Prof. Dr. Arif Herekar",
             specialization: "Neurologist",
             img: doctor1Img,
-            phone: "+92 300 1234567",
-            address: "Suite 15, Medical Plaza, Block 6, PECHS, Karachi",
-            hospital: "Aga Khan University Hospital",
-            experience: "15+ Years"
+            phone: "(021) 35833973",
+            address: "Clifton, Karachi, Pakistan",
+            hospital: "Hilal-E-Ahmar House Hospital",
+            experience: "39 Years"
         },
         {
             id: 2,
-            name: "Dr. Ahmed Hassan",
-            specialization: "Neurosurgeon",
+            name: "Prof. Dr. Akbar Ali Khan",
+            specialization: "Professor, Consultant Neurosurgeon",
             img: doctor2Img,
-            phone: "+92 301 2345678",
-            address: "Floor 3, Doctors Tower, Gulshan-e-Iqbal, Karachi",
-            hospital: "Jinnah Postgraduate Medical Centre",
-            experience: "12+ Years"
+            phone: "0303-5645833 (IMC Hospital)",
+            address: "Integrated Medical Care Hospital, Lahore, Pakistan",
+            hospital: "Integrated Medical Care (IMC) Hospital",
+            experience: "23+ Years"
         },
         {
             id: 3,
-            name: "Dr. Fatima Ali",
-            specialization: "Radiologist",
+            name: "Prof. Dr. Inayat Ullah Khan",
+            specialization: "Neurosurgeon",
             img: doctor3Img,
-            phone: "+92 302 3456789",
-            address: "Room 205, Medical Complex, Clifton, Karachi",
-            hospital: "Liaquat National Hospital",
-            experience: "10+ Years"
+            phone: "(+92) 51-8446666",
+            address: "Kulsum Plaza, 2020 Blue Area, Jinnah Avenue, Islamabad, Pakistan",
+            hospital: "Kulsoom Int. Hospital",
+            experience: "30 Years"
         },
         {
             id: 4,
-            name: "Dr. Muhammad Khan",
-            specialization: "Oncologist",
+            name: "Dr. Mohsin Ali Raza",
+            specialization: "Neurosurgeon",
             img: doctor4Img,
-            phone: "+92 303 4567890",
-            address: "Unit 8, Healthcare Center, Defence, Karachi",
-            hospital: "Shaukat Khanum Memorial Cancer Hospital",
-            experience: "18+ Years"
+            phone: "(048) 3225200",
+            address: "Sargodha Road, Sargodha, Pakistan",
+            hospital: "Ashraf Medical Center",
+            experience: "12 Years"
         },
         {
             id: 5,
-            name: "Dr. Ayesha Malik",
-            specialization: "Neurologist",
+            name: "Dr. Ghulam Dastgir",
+            specialization: "Neurosurgeon",
             img: doctor5Img,
-            phone: "+92 304 5678901",
-            address: "Suite 12, Medical Plaza, Saddar, Karachi",
-            hospital: "Civil Hospital Karachi",
-            experience: "13+ Years"
+            phone: "0335 4540610",
+            address: "Kala Khatai Road, Haji Kot Lahore",
+            hospital: "Shah Mohammad Neurosurgery Clinic",
+            experience: "28 Years"
         },
         {
             id: 6,
-            name: "Dr. Usman Ahmed",
+            name: "Asst. Prof. Dr. Muzaffer Uddin",
             specialization: "Neurosurgeon",
             img: doctor6Img,
-            phone: "+92 305 6789012",
-            address: "Floor 5, Doctors Building, Nazimabad, Karachi",
-            hospital: "Ziauddin University Hospital",
-            experience: "16+ Years"
+            phone: "(021) 111 166 177",
+            address: "FB Area, Karachi",
+            hospital: "Mamji Hospital",
+            experience: "27 Years"
         }
     ];
 

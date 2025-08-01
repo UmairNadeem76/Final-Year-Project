@@ -7,3 +7,12 @@ export interface User {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface PdfHistoryItem {
+    _id: string;
+    filename: string;
+    date: string;
+    category: string;
+    scanResult: string;
+    userId: string;
+}

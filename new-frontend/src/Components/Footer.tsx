@@ -34,8 +34,6 @@ const Footer: React.FC = () => {
                     <li><button className="footer-link-button" onClick={() => handleProtectedNavigate('/upload-ctscan')}>Upload CT-Scan</button></li>
                     <li><a href="/doctors">Doctors</a></li>
                     {isLoggedIn && <li><a href="/user">Account Info</a></li>}
-                    {isLoggedIn && <li><a href="/report-form">Report Form</a></li>}
-                    {isLoggedIn && <li><a href="/download-report">Download Report</a></li>}
                     <li><a href="/contact">Contact Us</a></li>
                     <li><a href="/information">About Us</a></li>
                 </ul>

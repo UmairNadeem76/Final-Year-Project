@@ -112,8 +112,6 @@ const Navbar: React.FC = () => {
                 {!loading && isLoggedIn && (
                     <>
                         <button onClick={() => handleNavigate('/user', 'user')} className={activeButton === 'user' ? 'active' : ''}>Account Info</button>
-                        <button onClick={() => handleNavigate('/report-form', 'report-form')} className={activeButton === 'report-form' ? 'active' : ''}>Report Form</button>
-                        <button onClick={() => handleNavigate('/download-report', 'download-report')} className={activeButton === 'download-report' ? 'active' : ''}>Download Report</button>
                     </>
                 )}
                 <button onClick={() => handleNavigate('/contact', 'contact')} className={activeButton === 'contact' ? 'active' : ''}>Contact Us</button>

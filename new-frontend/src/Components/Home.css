@@ -275,3 +275,27 @@
 .upload-again-button:hover {
     background-color: #10b981;
 }
+
+.generate-report-button {
+    background: linear-gradient(135deg, #1e3a8a, #4338ca);
+    color: white;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(30, 58, 138, 0.18);
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    outline: none;
+    margin-left: 1rem;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+}
+.generate-report-button:hover, .generate-report-button:focus {
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.28);
+    filter: brightness(1.08);
+}

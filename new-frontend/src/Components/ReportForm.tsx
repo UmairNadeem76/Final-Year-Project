@@ -16,9 +16,6 @@ interface ReportFormData {
     calculatedAge: string;
     gender: string;
     scanType: string;
-    emergencyContact: string;
-    emergencyPhone: string;
-    relationship: string;
 }
 
 const ReportForm: React.FC = () => {
@@ -29,16 +26,10 @@ const ReportForm: React.FC = () => {
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const [calculatedAge, setCalculatedAge] = useState<string>('');
 
-    // Get scan result from location state (passed from Home component)
+    // Get scan result and scan type from location state (passed from Home/CTScanUpload components)
     const scanResult = location.state?.scanResult || 'No Tumor Detected';
     const scanImage = location.state?.scanImage || null;
-
-    // Determine scan type based on scan result or default to MRI
-    const getScanType = () => {
-        // This would be determined by the actual scan type used
-        // For now, we'll default to MRI, but this should come from the scan process
-        return 'MRI';
-    };
+    const scanType = location.state?.scanType || 'MRI'; // Get scan type from location state
 
     // Function to calculate age from date of birth
     const calculateAge = (dateOfBirth: string): string => {
@@ -79,9 +70,6 @@ const ReportForm: React.FC = () => {
         calculatedAge: z.string(),
         gender: z.string().min(1, "Gender is required"),
         scanType: z.string().min(1, "Scan type is required"),
-        emergencyContact: z.string().optional(),
-        emergencyPhone: z.string().optional(),
-        relationship: z.string().optional(),
     });
 
     const {
@@ -111,11 +99,10 @@ const ReportForm: React.FC = () => {
         }
     }, [watchedDateOfBirth, setValue]);
 
-    // Auto-fill user data when component mounts
+    // Auto-fill scan type when component mounts
     useEffect(() => {
-        // Set scan type based on the scan that was performed
-        setValue('scanType', getScanType());
-    }, [setValue]);
+        setValue('scanType', scanType);
+    }, [scanType, setValue]);
 
     // Redirect if not logged in
     useEffect(() => {
@@ -151,20 +138,6 @@ const ReportForm: React.FC = () => {
                 <div className="rf-header">
                     <h1>Generate Medical Report</h1>
                     <p>Please provide the following information to generate your comprehensive medical report.</p>
-                </div>
-
-                <div className="rf-patient-info-summary">
-                    <h3>Scan Information</h3>
-                    <div className="rf-info-grid">
-                        <div className="rf-info-item">
-                            <span className="label">Scan Result:</span>
-                            <span className="value result">{scanResult}</span>
-                        </div>
-                        <div className="rf-info-item">
-                            <span className="label">Scan Type:</span>
-                            <span className="value">{getScanType()}</span>
-                        </div>
-                    </div>
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="rf-form">
@@ -208,8 +181,18 @@ const ReportForm: React.FC = () => {
                                     render={({ field }) => (
                                         <DatePicker
                                             id="dateOfBirth"
-                                            selected={field.value ? new Date(field.value) : null}
-                                            onChange={(date) => field.onChange(date?.toISOString().split('T')[0])}
+                                            selected={field.value ? new Date(field.value + 'T00:00:00') : null}
+                                            onChange={(date) => {
+                                                if (date) {
+                                                    const year = date.getFullYear();
+                                                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                                                    const day = String(date.getDate()).padStart(2, '0');
+                                                    const dateString = `${year}-${month}-${day}`;
+                                                    field.onChange(dateString);
+                                                } else {
+                                                    field.onChange('');
+                                                }
+                                            }}
                                             dateFormat="dd/MM/yyyy"
                                             placeholderText="dd/mm/yyyy"
                                             maxDate={new Date()}
@@ -265,62 +248,9 @@ const ReportForm: React.FC = () => {
                                     {...register("scanType")}
                                     readOnly
                                     className="readonly"
-                                    placeholder={getScanType()}
+                                    placeholder={scanType}
                                 />
                             </div>
-                        </div>
-                    </div>
-
-                    <div className="rf-form-section">
-                        <h3>Emergency Contact (Optional)</h3>
-                        <div className="rf-form-group">
-                            <label htmlFor="emergencyContact">Emergency Contact Name</label>
-                            <div className="rf-input-wrapper">
-                                <FaUserShield className="icon" />
-                                <input
-                                    type="text"
-                                    id="emergencyContact"
-                                    placeholder="Full name"
-                                    {...register("emergencyContact")}
-                                    className={errors.emergencyContact ? 'error' : ''}
-                                />
-                            </div>
-                            {errors.emergencyContact && <span className="rf-error-message">{errors.emergencyContact.message}</span>}
-                        </div>
-                        <div className="rf-form-group">
-                            <label htmlFor="emergencyPhone">Emergency Contact Phone</label>
-                            <div className="rf-input-wrapper">
-                                <FaPhone className="icon" />
-                                <input
-                                    type="tel"
-                                    id="emergencyPhone"
-                                    placeholder="Phone number"
-                                    {...register("emergencyPhone")}
-                                    className={errors.emergencyPhone ? 'error' : ''}
-                                />
-                            </div>
-                            {errors.emergencyPhone && <span className="rf-error-message">{errors.emergencyPhone.message}</span>}
-                        </div>
-                        <div className="rf-form-group">
-                            <label htmlFor="relationship">Relationship</label>
-                            <div className="rf-input-wrapper">
-                                <FaLink className="icon" />
-                                <select
-                                    id="relationship"
-                                    {...register("relationship")}
-                                    className={errors.relationship ? 'error' : ''}
-                                >
-                                    <option value="">Select Relationship</option>
-                                    <option value="Spouse">Spouse</option>
-                                    <option value="Parent">Parent</option>
-                                    <option value="Child">Child</option>
-                                    <option value="Sibling">Sibling</option>
-                                    <option value="Friend">Friend</option>
-                                    <option value="No Relation">No Relation</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                            {errors.relationship && <span className="rf-error-message">{errors.relationship.message}</span>}
                         </div>
                     </div>
 
