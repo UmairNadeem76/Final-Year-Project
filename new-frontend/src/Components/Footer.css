@@ -87,9 +87,13 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .footer-container {
-        grid-template-columns: repeat(2, 1fr);
-        text-align: center;
+
+    .quick-links,
+    .follow-us {
+        margin-left: 0 !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .footer-section {

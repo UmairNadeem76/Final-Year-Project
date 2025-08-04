@@ -564,3 +564,24 @@
         opacity: 1;
     }
 }
+
+.generate-report-btn {
+    padding: 10px 18px;
+    background: rgba(0, 123, 255, 0.2);
+    border: 1px solid rgba(0, 123, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.generate-report-btn:hover {
+    background: rgba(0, 123, 255, 0.35);
+    border-color: rgba(0, 123, 255, 0.6);
+    transform: scale(1.05);
+}

@@ -12,6 +12,7 @@ const CTScanUpload: React.FC = () => {
     const [fileDetails, setFileDetails] = useState<{ name: string; size: string } | null>(null);
     const [prediction, setPrediction] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [serverFilename, setServerFilename] = useState<string | null>(null);
 
     const { setUploadHistory, uploadHistory, isLoggedIn } = useGeneral();
     const navigate = useNavigate();
@@ -67,6 +68,7 @@ const CTScanUpload: React.FC = () => {
 
         const formData = new FormData();
         formData.append('file', image);
+        formData.append('scanType', 'CT');
 
         try {
             setProgress(1);
@@ -81,7 +83,7 @@ const CTScanUpload: React.FC = () => {
             }, 30);
 
             // Use CT-Scan model endpoint
-            const response = await fetch('http://localhost:5000/upload-ctscan', {
+            const response = await fetch('http://localhost:5000/upload', {
                 method: 'POST',
                 credentials: 'include',
                 body: formData,
@@ -99,11 +101,14 @@ const CTScanUpload: React.FC = () => {
             setSuccess(true);
             setPrediction(data.prediction);
 
+            setServerFilename(data.filename);
+            setImageUrl(`http://localhost:5000/upload/display/${data.filename}`)
+
             setUploadHistory([
                 ...uploadHistory,
                 {
                     id: Date.now(),
-                    filename: image.name,
+                    filename: serverFilename,
                     date: new Date().toISOString(),
                     result: data.prediction,
                     imageUrl: imageUrl,
@@ -212,6 +217,7 @@ const CTScanUpload: React.FC = () => {
                                 state: {
                                     scanResult: prediction || '',
                                     scanImage: imageUrl,
+                                    serverFilename: serverFilename,
                                     scanType: 'CT-Scan'
                                 }
                             })}

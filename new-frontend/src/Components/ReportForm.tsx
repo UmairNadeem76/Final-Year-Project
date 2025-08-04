@@ -26,11 +26,18 @@ const ReportForm: React.FC = () => {
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const [calculatedAge, setCalculatedAge] = useState<string>('');
 
-    // Get scan result and scan type from location state (passed from Home/CTScanUpload components)
-    const scanResult = location.state?.scanResult || 'No Tumor Detected';
-    const scanImage = location.state?.scanImage || null;
-    const scanType = location.state?.scanType || 'MRI'; // Get scan type from location state
+    // Get data from location state - this can come from either upload pages or account info
+    const locationState = location.state || {};
 
+    // Extract scan data - handling both direct upload and account info navigation
+    const scanResult = locationState.scanResult || 'No Tumor Detected';
+    const serverFilename = locationState.serverFilename || null;
+    const scanImage = `http://localhost:5000/upload/display/${serverFilename}`
+    const scanType = locationState.scanType || 'MRI';
+    const segmentedImageUrl =
+    scanType === 'MRI' && serverFilename
+        ? `http://localhost:5000/upload/display/${serverFilename.replace(/\.(jpg|jpeg|png)$/i, '')}_segmentation.jpg`
+        : null;
     // Function to calculate age from date of birth
     const calculateAge = (dateOfBirth: string): string => {
         if (!dateOfBirth) return '';
@@ -113,17 +120,24 @@ const ReportForm: React.FC = () => {
     }, [isLoggedIn, navigate]);
 
     const onSubmit: SubmitHandler<ReportFormData> = (data) => {
-        console.log('Form submitted:', data);
 
-        // Navigate to download page with form data
+
+        // Prepare navigation state with all image data
+        const navigationState = {
+            formData: data,
+            scanResult: scanResult,
+            scanImage: scanImage,
+            patientName: data.name,
+            patientEmail: data.email,
+            scanType: data.scanType,
+            // Include segmented image URL for MRI scans
+            ...(segmentedImageUrl && { segmentedImageUrl })
+        };
+
+
+        // Navigate to download page with form data and image URLs
         navigate('/download-report', {
-            state: {
-                formData: data,
-                scanResult: scanResult,
-                scanImage: scanImage,
-                patientName: data.name,
-                patientEmail: data.email
-            }
+            state: navigationState
         });
     };
 
@@ -275,4 +289,4 @@ const ReportForm: React.FC = () => {
     );
 };
 
-export default ReportForm; 
+export default ReportForm;

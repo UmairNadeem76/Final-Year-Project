@@ -12,6 +12,8 @@ const Home: React.FC = () => {
     const [fileDetails, setFileDetails] = useState<{ name: string; size: string } | null>(null);
     const [prediction, setPrediction] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [serverFilename, setServerFilename] = useState<string | null>(null);
+
 
     const { setUploadHistory, uploadHistory, isLoggedIn } = useGeneral();
     const navigate = useNavigate();
@@ -67,6 +69,7 @@ const Home: React.FC = () => {
 
         const formData = new FormData();
         formData.append('file', image);
+        formData.append('scanType', 'MRI');
 
         try {
             console.log('Uploading image...');
@@ -101,14 +104,19 @@ const Home: React.FC = () => {
             setSuccess(true);
             setPrediction(data.prediction);
 
+
+            setServerFilename(data.filename);
+            setImageUrl(`http://localhost:5000/upload/display/${data.filename}`)
+
             setUploadHistory([
                 ...uploadHistory,
                 {
                     id: Date.now(),
-                    filename: image.name,
+                    // filename: image.name,
                     date: new Date().toISOString(),
                     result: data.prediction,
-                    imageUrl: imageUrl,
+                    filename: serverFilename,
+                    imageUrl: `http://localhost:5000/upload/display/${data.filename}`,
                 }
             ]);
 
@@ -214,7 +222,9 @@ const Home: React.FC = () => {
                             onClick={() => navigate('/report-form', {
                                 state: {
                                     scanResult: prediction || '',
-                                    scanImage: imageUrl
+                                    scanImage: imageUrl,
+                                    serverFilename: serverFilename,
+                                    scanType: 'MRI' // Optional but helpful for context
                                 }
                             })}
                         >

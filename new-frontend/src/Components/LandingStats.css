@@ -81,12 +81,17 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 3rem;
+    padding: 1rem;
+    overflow: visible;
+    /* ✅ Prevents clipping of SVGs */
 }
 
 .counter svg {
     width: 100px;
     height: 100px;
     transform: rotate(-90deg);
+    overflow: visible;
+    /* ✅ Ensures full circle is visible */
 }
 
 .counter circle {
@@ -126,4 +131,60 @@
 .hidden,
 .reveal {
     will-change: transform, opacity;
+}
+
+@media (max-width: 1024px) {
+    .counters {
+        gap: 3rem;
+    }
+
+    .counter svg {
+        width: 80px;
+        height: 80px;
+    }
+
+    .counter h3 {
+        font-size: 1.25rem;
+    }
+
+    .counter p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .counters {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .counter svg {
+        width: 70px;
+        height: 70px;
+    }
+
+    .counter h3 {
+        font-size: 1.1rem;
+    }
+
+    .counter p {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .counter svg {
+        width: 60px;
+        height: 60px;
+    }
+
+    .counter h3 {
+        font-size: 1rem;
+    }
+
+    .counter p {
+        font-size: 0.85rem;
+    }
 }

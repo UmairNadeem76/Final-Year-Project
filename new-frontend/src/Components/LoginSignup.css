@@ -166,10 +166,6 @@ body {
     }
 }
 
-.container {
-    animation: slideFade 0.6s ease forwards;
-}
-
 .password-input {
     position: relative;
 }
@@ -229,36 +225,27 @@ body {
         opacity: 0;
         transform: translateY(-20px);
     }
-
     10% {
         opacity: 1;
         transform: translateY(0);
     }
-
     90% {
         opacity: 1;
         transform: translateY(0);
     }
-
     100% {
         opacity: 0;
         transform: translateY(-20px);
     }
 }
 
-.login-wrapper {
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-    flex-wrap: wrap;
-}
-
+.login-wrapper,
 .login-signup-wrapper {
     display: flex;
     height: 100vh;
     width: 100%;
     overflow: hidden;
+    flex-wrap: wrap;
 }
 
 .form-section {
@@ -272,16 +259,16 @@ body {
     overflow-y: auto;
 }
 
-.image-section img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 .image-section {
     flex: 1;
     height: 100%;
     animation: imageFadeZoom 1s ease forwards;
+}
+
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 @keyframes imageFadeZoom {
@@ -289,7 +276,6 @@ body {
         opacity: 0;
         transform: scale(1.05);
     }
-
     100% {
         opacity: 1;
         transform: scale(1);
@@ -328,4 +314,74 @@ body {
     background: #ffd700;
     color: #222;
     font-weight: bold;
+}
+
+/* 🔽 RESPONSIVE DESIGN 🔽 */
+
+@media (max-width: 1024px) {
+    .form-section {
+        padding: 1.5rem;
+    }
+
+    .container {
+        padding: 2.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-wrapper,
+    .login-signup-wrapper {
+        flex-direction: column;
+    }
+
+    .image-section {
+        display: none;
+    }
+
+    .container {
+        max-width: 90%;
+        margin: 30px auto;
+        padding: 2rem 1.25rem;
+    }
+
+    .text {
+        font-size: 1.6rem;
+    }
+
+    .tab {
+        font-size: 1rem;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .submit-container {
+        flex-direction: column;
+    }
+
+    .submit {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem 1rem;
+        border-radius: 20px;
+    }
+
+    .text {
+        font-size: 1.4rem;
+    }
+
+    .tab-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .input img {
+        width: 18px;
+    }
+
+    .input input {
+        font-size: 0.95rem;
+    }
 }

@@ -12,11 +12,10 @@ const Navbar: React.FC = () => {
     const [activeButton, setActiveButton] = useState<string>('');
     const { isLoggedIn, setIsLoggedIn, user, setUser, loading } = useGeneral();
     const [showDropdown, setShowDropdown] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const userEmail = user?.email || '';
     const userName = user?.name || '';
-
-    console.log("checking if logged in", isLoggedIn, "and user is ", user);
 
     useEffect(() => {
         const pathMap: Record<string, string> = {
@@ -29,10 +28,15 @@ const Navbar: React.FC = () => {
             '/doctors': 'doctors',
             '/report-form': 'report-form',
             '/download-report': 'download-report',
+            '/upload-ctscan': 'upload-ctscan',
         };
         setActiveButton(pathMap[location.pathname] || '');
     }, [location.pathname]);
 
+    useEffect(() => {
+        setShowDropdown(false);
+        setMobileMenuOpen(false);
+    }, [location.pathname]);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -50,6 +54,11 @@ const Navbar: React.FC = () => {
         navigate(path);
         setActiveButton(buttonName);
         setShowDropdown(false);
+    };
+
+    const handleMobileNavigate = (path: string, buttonName: string) => {
+        handleNavigate(path, buttonName);
+        setMobileMenuOpen(false);
     };
 
     const handleUploadClick = () => {
@@ -72,16 +81,15 @@ const Navbar: React.FC = () => {
         try {
             await fetch('http://localhost:5000/users/logout', {
                 method: 'POST',
-                credentials: 'include', // Send cookie
+                credentials: 'include',
             });
         } catch (err) {
             console.error('Logout failed:', err);
         }
-
-        // Clear local state no matter what
         setIsLoggedIn(false);
         setUser(null);
         setShowDropdown(false);
+        setMobileMenuOpen(false);
         navigate('/landing');
     };
 
@@ -110,12 +118,12 @@ const Navbar: React.FC = () => {
                 <button onClick={() => handleNavigate('/doctors', 'doctors')} className={activeButton === 'doctors' ? 'active' : ''}>Doctors</button>
 
                 {!loading && isLoggedIn && (
-                    <>
-                        <button onClick={() => handleNavigate('/user', 'user')} className={activeButton === 'user' ? 'active' : ''}>Account Info</button>
-                    </>
+                    <button onClick={() => handleNavigate('/user', 'user')} className={activeButton === 'user' ? 'active' : ''}>Account Info</button>
                 )}
                 <button onClick={() => handleNavigate('/contact', 'contact')} className={activeButton === 'contact' ? 'active' : ''}>Contact Us</button>
                 <button onClick={() => handleNavigate('/information', 'information')} className={activeButton === 'information' ? 'active' : ''}>About Us</button>
+
+                <button className="mobile-menu-toggle" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>☰</button>
 
                 {!loading && isLoggedIn && (
                     <div className="profile-wrapper" ref={dropdownRef}>
@@ -136,6 +144,26 @@ const Navbar: React.FC = () => {
                     </div>
                 )}
             </div>
+
+            {mobileMenuOpen && (
+                <div className="mobile-dropdown">
+                    <button onClick={() => handleMobileNavigate('/landing', 'landing')} className={activeButton === 'landing' ? 'active' : ''}>Home</button>
+                    {!loading && !isLoggedIn && (
+                        <button onClick={() => handleMobileNavigate('/login-signup', 'login-signup')} className={activeButton === 'login-signup' ? 'active' : ''}>Signup & Login</button>
+                    )}
+                    <button onClick={handleUploadClick} className={activeButton === 'home' ? 'active' : ''}>Upload MRI</button>
+                    <button onClick={handleCTScanUploadClick} className={activeButton === 'upload-ctscan' ? 'active' : ''}>Upload CT-Scan</button>
+                    <button onClick={() => handleMobileNavigate('/doctors', 'doctors')} className={activeButton === 'doctors' ? 'active' : ''}>Doctors</button>
+                    {!loading && isLoggedIn && (
+                        <button onClick={() => handleMobileNavigate('/user', 'user')} className={activeButton === 'user' ? 'active' : ''}>Account Info</button>
+                    )}
+                    <button onClick={() => handleMobileNavigate('/contact', 'contact')} className={activeButton === 'contact' ? 'active' : ''}>Contact Us</button>
+                    <button onClick={() => handleMobileNavigate('/information', 'information')} className={activeButton === 'information' ? 'active' : ''}>About Us</button>
+                    {!loading && isLoggedIn && (
+                        <button onClick={handleLogout}>Logout</button>
+                    )}
+                </div>
+            )}
         </nav>
     );
 };

@@ -248,6 +248,7 @@
         opacity: 0;
         transform: translateY(40px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -259,6 +260,7 @@
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -315,7 +317,7 @@
     pointer-events: none;
 }
 
-.form-group.select-group select:focus + .select-arrow {
+.form-group.select-group select:focus+.select-arrow {
     border-top-color: #60a5fa;
 }
 
@@ -326,4 +328,4 @@
 .rf-form-group .react-select-container .react-select__control {
     background-color: #1f2937;
     border: 1px solid #4a5568;
-} 
+}

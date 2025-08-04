@@ -7,7 +7,6 @@ import html2canvas from 'html2canvas';
 import logo from '../Assets/logo_new.png';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import { MdOutlineScanner } from 'react-icons/md';
-import testScanImage from '../Assets/Te-pi_0063.jpg';
 
 interface ReportData {
     formData: {
@@ -22,6 +21,7 @@ interface ReportData {
     scanImage: string | null;
     patientName: string;
     patientEmail: string;
+    segmentedImageUrl?: string | null;
 }
 
 const DownloadReport: React.FC = () => {
@@ -29,22 +29,26 @@ const DownloadReport: React.FC = () => {
     const location = useLocation();
     const { isLoggedIn } = useGeneral();
     const [isGenerating, setIsGenerating] = useState(false);
+    const [segmentedImageError, setSegmentedImageError] = useState(false);
     const reportPreviewRef = useRef<HTMLDivElement>(null);
 
+    // Get report data from location state
     const reportData: ReportData | null = location.state?.formData ? {
         formData: location.state.formData,
         scanResult: location.state.scanResult,
         scanImage: location.state.scanImage,
         patientName: location.state.patientName,
-        patientEmail: location.state.patientEmail
+        patientEmail: location.state.patientEmail,
+        segmentedImageUrl: location.state.segmentedImageUrl || null
     } : null;
 
+    // Debug logging
     useEffect(() => {
-        // Temporarily disabled for testing - will be re-enabled later
-        // if (!isLoggedIn) {
-        //     navigate('/login-signup');
-        //     return;
-        // }
+
+    }, [location.state, reportData]);
+
+    useEffect(() => {
+
 
         if (!reportData) {
             navigate('/home');
@@ -68,35 +72,29 @@ const DownloadReport: React.FC = () => {
 
             const imgData = canvas.toDataURL('image/jpeg', 0.95);
 
-            // A4 dimensions in points
             const pdfWidth = 595.28;
             const pdfHeight = 841.89;
 
-            // Virtually zero margins (0.05 inch = 3.6 points)
-            const margin = 3.6; // 0.05 inch margin
-            const contentWidth = pdfWidth - (2 * margin); // Width minus left and right margins
-            const contentHeight = pdfHeight - (2 * margin); // Height minus top and bottom margins
+            const margin = 3.6;
+            const contentWidth = pdfWidth - (2 * margin);
+            const contentHeight = pdfHeight - (2 * margin);
 
             const canvasWidth = canvas.width;
             const canvasHeight = canvas.height;
             const canvasAspectRatio = canvasWidth / canvasHeight;
 
-            // Scale the preview to fit within the content area (absolute maximum size)
             let finalPdfWidth, finalPdfHeight;
 
             if (canvasAspectRatio > contentWidth / contentHeight) {
-                // Preview is wider - fit to content width (absolute maximum width usage)
                 finalPdfWidth = contentWidth;
                 finalPdfHeight = contentWidth / canvasAspectRatio;
             } else {
-                // Preview is taller - fit to content height (absolute maximum height usage)
                 finalPdfHeight = contentHeight;
                 finalPdfWidth = contentHeight * canvasAspectRatio;
             }
 
-            // Position with virtually zero margins
-            const xOffset = margin + (contentWidth - finalPdfWidth) / 2; // Center within content area
-            const yOffset = margin + (contentHeight - finalPdfHeight) / 2; // Center within content area
+            const xOffset = margin + (contentWidth - finalPdfWidth) / 2;
+            const yOffset = margin + (contentHeight - finalPdfHeight) / 2;
 
             const doc = new jsPDF({
                 orientation: 'p',
@@ -122,6 +120,16 @@ const DownloadReport: React.FC = () => {
         } finally {
             setIsGenerating(false);
         }
+    };
+
+    const handleSegmentedImageError = () => {
+
+        setSegmentedImageError(true);
+    };
+
+    const handleSegmentedImageLoad = () => {
+
+        setSegmentedImageError(false);
     };
 
     // Temporarily disabled for testing - will be re-enabled later
@@ -215,27 +223,16 @@ const DownloadReport: React.FC = () => {
                                     <span className="meta-label">PATIENT INFO: </span>
                                     <span className="meta-value">{reportData.formData.calculatedAge} / {reportData.formData.gender}</span>
                                 </div>
-                                <div className="report-ids">
-                                    <div className="id-item">
-                                        <span className="id-label">Patient ID: </span>
-                                        <span className="id-value">{reportData.patientName?.replace(/\s+/g, '').toLowerCase()}-{Date.now()}</span>
-                                    </div>
-                                    <div className="id-item">
-                                        <span className="id-label">Report ID: </span>
-                                        <span className="id-value">{Date.now()}</span>
-                                    </div>
-                                </div>
                                 <div className="report-date">
                                     <span className="date-label">Reported On: </span>
                                     <span className="date-value">{formatDateTime(new Date())}</span>
                                 </div>
                             </div>
                         </div>
-
                         <div className="report-body">
-                            {reportData.scanImage || testScanImage ? (
+                            {reportData.scanImage ? (
                                 <div className="scan-image-container">
-                                    <img src={testScanImage} alt="Scan" className="scan-image" />
+                                    <img src={reportData.scanImage} alt="Scan" className="scan-image" />
                                 </div>
                             ) : null}
                             <h2 className="section-title">{reportData.formData.scanType === 'MRI' ? 'MRI Image' : 'CT-Scan Image'}</h2>
@@ -258,25 +255,26 @@ const DownloadReport: React.FC = () => {
                                 </div>
                             </div>
 
-                            {/* Segmentation Results Section */}
-                            <div className="dr-section-box dr-segmentation-section">
-                                <h3>Segmentation Results</h3>
-                                <div className="dr-section-underline"></div>
-                                <div className="dr-segmentation-images">
-                                    <div className="dr-segmentation-image-group">
-                                        <img src={testScanImage} alt="Original Image" className="dr-segmentation-image" />
-                                        <div className="dr-segmentation-title">Original Image</div>
+                            {/* Segmentation Results Section - Only for MRI and when segmented image is available */}
+                            {reportData.formData.scanType === 'MRI' && reportData.segmentedImageUrl && (
+                                <div className="dr-section-box dr-segmentation-section">
+                                    <h3>Segmentation Results</h3>
+                                    <div className="dr-section-underline"></div>
+                                    <div className="dr-segmentation-images">
+                                        <div className="dr-segmentation-image-group">
+                                            <img
+                                                src={reportData.segmentedImageUrl}
+                                                alt="Segmented Image"
+                                                className="dr-segmentation-image"
+                                                onError={handleSegmentedImageError}
+                                                onLoad={handleSegmentedImageLoad}
+                                            />
+
+                                        </div>
                                     </div>
-                                    <div className="dr-segmentation-image-group">
-                                        <img src={testScanImage} alt="Predicted Mask" className="dr-segmentation-image" />
-                                        <div className="dr-segmentation-title">Predicted Mask</div>
-                                    </div>
-                                    <div className="dr-segmentation-image-group">
-                                        <img src={testScanImage} alt="Mask Overlay" className="dr-segmentation-image" />
-                                        <div className="dr-segmentation-title">Mask Overlay</div>
-                                    </div>
+            
                                 </div>
-                            </div>
+                            )}
 
                             <div className="dr-disclaimer-section">
                                 <h3>Important Disclaimers</h3>
@@ -321,4 +319,4 @@ const DownloadReport: React.FC = () => {
     );
 };
 
-export default DownloadReport; 
+export default DownloadReport;
